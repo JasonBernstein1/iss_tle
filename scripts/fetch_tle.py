@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 # URL to get TLEs for active satellites
 url = "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json"
@@ -38,7 +38,10 @@ def fetch_iss_tle():
                     "BSTAR": sat["BSTAR"],
                     "MEAN_MOTION_DOT": sat["MEAN_MOTION_DOT"],
                     "MEAN_MOTION_DDOT": sat["MEAN_MOTION_DDOT"],
-                    "date_fetched": datetime.utcnow().isoformat() + "Z",
+                    "date_fetched": datetime.now(timezone.utc)
+                    .isoformat()
+                    .replace("+00:00", "")
+                    + "Z",
                 }
                 return tle_data
     return None
