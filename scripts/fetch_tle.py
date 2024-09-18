@@ -15,16 +15,15 @@ def fetch_tle(url: str, norad_cat_id: int):
     # Send a GET request to the CelesTrak API
     response = requests.get(url)
     if response.status_code == 200:
-        data = response.json()
-        # Loop through all satellites in the response
-        for sat in data:
-            if sat["NORAD_CAT_ID"] == norad_cat_id:
-                # Extract the JSON data for the given ID
-                tle_data = sat
-                tle_data["date_fetched"] = (
+        tles = response.json()
+        # Loop through all satellite TLEs in the response
+        for tle in tles:
+            if tle["NORAD_CAT_ID"] == norad_cat_id:
+                # Save approximate time TLE was obtained
+                tle["date_fetched"] = (
                     datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
                 )
-                return tle_data
+                return tle
     return None
 
 
