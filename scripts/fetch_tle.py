@@ -17,7 +17,10 @@ def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
                 tle["date_fetched"] = (
                     datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
                 )
+                print("ISS TLE has been fetched")
                 return tle
+    else:
+        print("ISS TLE was not fetched")
     return None
 
 
@@ -37,6 +40,9 @@ def append_tle(tle: Dict[str, Any], file_path: str) -> None:
     if len(data) >= 1:
         if tle["EPOCH"] != data[-1]["EPOCH"]:
             data.append(tle)
+            print(f"ISS TLE is new and saved: {tle}")
+        else:
+            print("ISS TLE is not new")
 
     # Write the updated list back to the JSON file
     with open(file_path, "w") as file:
@@ -54,6 +60,3 @@ if __name__ == "__main__":
     tle = fetch_tle(url, norad_cat_id=iss_norad_id)
     if tle:
         append_tle(tle, file_path="iss_tle.json")
-        print(f"ISS TLE fetched and appended: {tle}")
-    else:
-        print("Could not fetch ISS TLE")
