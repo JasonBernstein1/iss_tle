@@ -31,8 +31,14 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add iss_tle.json
-          git commit -m "Update ISS TLE"
-          git push
+
+          # Check if there are changes to commit
+          if ! git diff --exit-code iss_tle.json; then
+            git add iss_tle.json
+            git commit -m "Update ISS TLE"
+            git push
+          else
+            echo "No changes to commit."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
