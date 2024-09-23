@@ -33,8 +33,10 @@ def append_tle(tle: Dict[str, Any], file_path: str) -> None:
     else:
         data = []
 
-    # Append the new TLE to the list
-    data.append(tle)
+    # Append the TLE to the list of TLEs if it is new
+    if len(data) >= 1:
+        if tle["EPOCH"] != data[-1]["EPOCH"]:
+            data.append(tle)
 
     # Write the updated list back to the JSON file
     with open(file_path, "w") as file:
