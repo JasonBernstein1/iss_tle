@@ -21,7 +21,7 @@ def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
     return None
 
 
-def append_tle(tle_data: Dict[str, Any], file_path: str) -> None:
+def append_tle(tle: Dict[str, Any], file_path: str) -> None:
     # Check if the JSON file exists
     if os.path.exists(file_path):
         # Read existing data
@@ -33,8 +33,8 @@ def append_tle(tle_data: Dict[str, Any], file_path: str) -> None:
     else:
         data = []
 
-    # Append the new TLE data to the list
-    data.append(tle_data)
+    # Append the new TLE to the list
+    data.append(tle)
 
     # Write the updated list back to the JSON file
     with open(file_path, "w") as file:
