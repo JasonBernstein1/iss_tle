@@ -4,13 +4,6 @@ import os
 from datetime import datetime, timezone
 from typing import Optional, Any, Dict
 
-# URL to get TLEs for active satellites
-url = "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json"
-
-# NORAD ID for the ISS
-iss_norad_id = 25544
-file_path = "iss_tle.json"
-
 
 def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
     # Send a GET request to the CelesTrak API
@@ -49,9 +42,16 @@ def append_tle(tle_data: Dict[str, Any], file_path: str) -> None:
 
 
 if __name__ == "__main__":
-    tle = fetch_tle(url, iss_norad_id)
+
+    # URL to get TLEs for active satellites
+    url = "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json"
+
+    # NORAD ID for the ISS
+    iss_norad_id = 25544
+
+    tle = fetch_tle(url, norad_cat_id=iss_norad_id)
     if tle:
-        append_tle(tle, file_path)
+        append_tle(tle, file_path="iss_tle.json")
         print(f"ISS TLE fetched and appended: {tle}")
     else:
         print("Could not fetch ISS TLE")
