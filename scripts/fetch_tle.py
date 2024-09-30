@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from datetime import datetime, timezone
-from typing import Optional, Any, Dict
+from typing import Optional, Any, Dict, List
 
 
 def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
@@ -24,7 +24,7 @@ def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
     return None
 
 
-def append_tle(tle: Dict[str, Any], file_path: str) -> None:
+def load_tles(file_path: str) -> List[Dict[str, Any]]:
     # Check if the JSON file exists
     if os.path.exists(file_path):
         # Read existing data
@@ -35,7 +35,12 @@ def append_tle(tle: Dict[str, Any], file_path: str) -> None:
                 data = []
     else:
         data = []
+    return data
 
+
+def append_tle(tle: Dict[str, Any], file_path: str) -> None:
+    # Load previous TLEs
+    data = load_tles(file_path)
     # Append the TLE to the list of TLEs if it is new
     if len(data) >= 1:
         if tle["EPOCH"] != data[-1]["EPOCH"]:
