@@ -6,6 +6,17 @@ from typing import Optional, Any, Dict, List
 
 
 def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
+    """
+    Fetches the TLE (Two-Line Element) data for a satellite with the specified NORAD ID.
+
+    Args:
+        url (str): The API endpoint to fetch satellite TLE data from.
+        norad_cat_id (int): The NORAD catalog ID of the satellite to filter the TLE data.
+
+    Returns:
+        Optional[Dict[str, Any]]: A dictionary containing the TLE data for the satellite
+        if found, or None if the TLE data could not be fetched or the satellite was not found.
+    """
     # Send a GET request to the CelesTrak API
     response = requests.get(url)
     if response.status_code == 200:
@@ -25,6 +36,16 @@ def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
 
 
 def load_tles(file_path: str) -> List[Dict[str, Any]]:
+    """
+    Loads TLE data from a specified JSON file.
+
+    Args:
+        file_path (str): The path to the JSON file containing previously saved TLEs.
+
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries representing the TLE data. If the file does
+        not exist or cannot be read, an empty list is returned.
+    """
     # Check if the JSON file exists
     if os.path.exists(file_path):
         # Read existing data
@@ -39,6 +60,16 @@ def load_tles(file_path: str) -> List[Dict[str, Any]]:
 
 
 def append_tle(tle: Dict[str, Any], file_path: str) -> None:
+    """
+    Appends new TLE data to a JSON file if it does not already exist in the file.
+
+    Args:
+        tle (Dict[str, Any]): The TLE data to be appended.
+        file_path (str): The path to the JSON file where the TLE data is stored.
+
+    Returns:
+        None
+    """
     # Load previous TLEs
     data = load_tles(file_path)
     # Append the TLE to the list of TLEs if it is new
