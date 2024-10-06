@@ -1,8 +1,9 @@
-import requests
 import json
 import os
 from datetime import datetime, timezone
 from typing import Optional, Any, Dict, List
+
+import requests
 
 
 def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
