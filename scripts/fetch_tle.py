@@ -19,7 +19,7 @@ def fetch_tle(url: str, norad_cat_id: int) -> Optional[Dict[str, Any]]:
         if found, or None if the TLE data could not be fetched or the satellite was not found.
     """
     # Send a GET request to the CelesTrak API
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     if response.status_code == 200:
         tles = response.json()
         # Loop through all satellite TLEs in the response
