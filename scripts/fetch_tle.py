@@ -50,7 +50,7 @@ def load_tles(file_path: str) -> List[Dict[str, Any]]:
     # Check if the JSON file exists
     if os.path.exists(file_path):
         # Read existing data
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             try:
                 data = json.load(file)
             except json.JSONDecodeError:
