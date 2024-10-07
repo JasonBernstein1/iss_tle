@@ -82,7 +82,7 @@ def append_tle(tle: Dict[str, Any], file_path: str) -> None:
             print("ISS TLE is not new")
 
     # Write the updated list back to the JSON file
-    with open(file_path, "w") as file:
+    with open(file_path, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4)
 
 
