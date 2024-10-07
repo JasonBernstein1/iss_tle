@@ -94,6 +94,6 @@ if __name__ == "__main__":
     # NORAD ID for the ISS
     iss_norad_id = 25544
 
-    tle = fetch_tle(url, norad_cat_id=iss_norad_id)
-    if tle:
-        append_tle(tle, file_path="iss_tle.json")
+    iss_tle = fetch_tle(url, norad_cat_id=iss_norad_id)
+    if iss_tle:
+        append_tle(iss_tle, file_path="iss_tle.json")
