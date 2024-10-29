@@ -2678,5 +2678,25 @@
         "MEAN_MOTION_DOT": 0.00047238,
         "MEAN_MOTION_DDOT": 0,
         "date_fetched": "2024-10-29T07:16:02.563867Z"
+    },
+    {
+        "OBJECT_NAME": "ISS (ZARYA)",
+        "OBJECT_ID": "1998-067A",
+        "EPOCH": "2024-10-29T09:43:35.296032",
+        "MEAN_MOTION": 15.50728255,
+        "ECCENTRICITY": 0.0009124,
+        "INCLINATION": 51.6406,
+        "RA_OF_ASC_NODE": 10.5581,
+        "ARG_OF_PERICENTER": 114.5833,
+        "MEAN_ANOMALY": 332.9952,
+        "EPHEMERIS_TYPE": 0,
+        "CLASSIFICATION_TYPE": "U",
+        "NORAD_CAT_ID": 25544,
+        "ELEMENT_SET_NO": 999,
+        "REV_AT_EPOCH": 47936,
+        "BSTAR": 0.00079212,
+        "MEAN_MOTION_DOT": 0.00046268,
+        "MEAN_MOTION_DDOT": 0,
+        "date_fetched": "2024-10-29T13:23:40.280175Z"
     }
 ]
