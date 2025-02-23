@@ -27,6 +27,21 @@ jobs:
         run: |
           python scripts/fetch_tle.py
 
+      - name: Update README with TLE count
+        run: |
+          # Get the number of TLEs using jq
+          num_tles=$(jq '. | length' iss_tle.json)
+          
+          # Update or add the "Number of TLEs" line in README.md
+          if grep -q '^Number of TLEs:' README.md; then
+            # Update the existing line
+            sed -i "s/^Number of TLEs:.*/Number of TLEs: ${num_tles}/" README.md
+          else
+            # Add a new line if not present
+            echo
+            echo "Number of TLEs: ${num_tles}" >> README.md
+          fi
+
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
@@ -34,8 +49,8 @@ jobs:
 
           # Check if there are changes to commit
           if ! git diff --exit-code iss_tle.json; then
-            git add iss_tle.json
-            git commit -m "Update ISS TLE"
+            git add iss_tle.json README.md
+            git commit -m "Update ISS TLE and README with TLE count"
             git push
           else
             echo "No changes to commit."
