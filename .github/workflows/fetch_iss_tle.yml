@@ -38,7 +38,7 @@ jobs:
             sed -i "s/^Number of TLEs:.*/Number of TLEs: ${num_tles}/" README.md
           else
             # Add a new line if not present
-            echo
+            echo >> README.md
             echo "Number of TLEs: ${num_tles}" >> README.md
           fi
 
